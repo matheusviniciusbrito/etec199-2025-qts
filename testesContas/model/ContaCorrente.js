@@ -1,11 +1,11 @@
-const {Titular, getTitulares } = require ("./Titular.js")
-const {Conta} = require('./Conta.js')
+const { Titular } = require ("./Titular.js")
+const { Conta } = require('./Conta.js')
 
 class ContaCorrente extends Conta{
     static contasCC = []
     
     constructor(saldo, senha, agencia, numero, titular){
-        super(saldo, senha, numero, agencia, titular)
+        super(saldo, senha, agencia, numero, titular)
         ContaCorrente.contasCC.push(this)
     }
     
@@ -14,7 +14,9 @@ class ContaCorrente extends Conta{
     }
 
     static gerarContasCorrentes(){
-        Titular.gerarTitulares()
+        if (Titular.titulares.length === 0) {
+            Titular.gerarTitulares()
+        }
         let titularesCC = Titular.titulares
         
         new ContaCorrente(1200, 4321, 101, 1001, titularesCC[0]);
